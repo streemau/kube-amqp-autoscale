@@ -18,4 +18,11 @@ FROM golang:1.14
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=builder /go/bin/autoscale /go/bin/autoscale
 
-ENTRYPOINT ["/go/bin/autoscale"]
+ADD bin/docker-entrypoint.sh /go/bin/
+
+RUN chmod +x /go/bin/docker-entrypoint.sh
+
+WORKDIR /go/bin
+
+ENTRYPOINT ["/go/bin/docker-entrypoint.sh"]
+CMD [""]
