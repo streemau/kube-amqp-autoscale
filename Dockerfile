@@ -6,7 +6,6 @@ ENV GO111MODULE=on
 
 COPY Makefile .
 COPY go.mod .
-COPY go.sum .
 
 RUN make depend
 
