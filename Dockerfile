@@ -18,9 +18,14 @@ RUN \
     shasum -a 256 go${GO_VER}.linux-amd64.tar.gz | grep ${GO_SHA256} && \
     tar -C /usr/local -xzf go${GO_VER}.linux-amd64.tar.gz && \
     rm -f go${GO_VER}.linux-amd64.tar.gz && \
-    mkdir -p ${GOPATH}/{src,bin,pkg} && \
-    git clone --depth 1 https://github.com/mbogus/kube-amqp-autoscale.git ${SRC_PATH} && \
-    cd ${SRC_PATH} && \
+    mkdir -p ${GOPATH}/{src,bin,pkg}
+
+    # git clone --depth 1 https://github.com/mbogus/kube-amqp-autoscale.git ${SRC_PATH} && \
+    # cd ${SRC_PATH} && \
+
+COPY . .
+
+RUN \
     make depend && \
     make test && \
     make && \
