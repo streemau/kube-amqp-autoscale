@@ -21,14 +21,12 @@ RUN \
     mkdir -p ${GOPATH}/{src,bin,pkg}
 
     # git clone --depth 1 https://github.com/mbogus/kube-amqp-autoscale.git ${SRC_PATH} && \
-    # cd ${SRC_PATH} && \
 
-COPY . .
+COPY . ${SRC_PATH}
 
 RUN \
+	cd ${SRC_PATH} && \
     make depend && \
-    make test && \
-    make && \
     mv .build/autoscale ${BIN_DIR} && \
     chmod +x ${BIN_DIR}/* && \
     cd ${HOME} && \
